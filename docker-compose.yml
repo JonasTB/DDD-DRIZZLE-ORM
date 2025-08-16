@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: ddd_drizzle_postgres
+    environment:
+      POSTGRES_DB: ddd_drizzle
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ddd_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ddd_drizzle_app
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=ddd_drizzle
+      - NODE_ENV=production
+    depends_on:
+      - postgres
+    networks:
+      - ddd_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+
+networks:
+  ddd_network:
+    driver: bridge
