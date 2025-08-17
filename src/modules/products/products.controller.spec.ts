@@ -1,13 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing'
-import { ProductsController } from './products.controller'
-import { CreateProductUseCase } from '@application/products/usecases/create-product.usecase'
-import { GetProductUseCase } from '@application/products/usecases/get-product.usecase'
-import { GetAllProductsUseCase } from '@application/products/usecases/get-all-products.usecase'
-import { UpdateProductUseCase } from '@application/products/usecases/update-product.usecase'
-import { DeleteProductUseCase } from '@application/products/usecases/delete-product.usecase'
-import { CreateProductDto } from '@application/products/dto/create-product.dto'
-import { UpdateProductDto } from '@application/products/dto/update-product.dto'
+import type { CreateProductDto } from '@application/products/dto/create-product.dto'
+import type { UpdateProductDto } from '@application/products/dto/update-product.dto'
+import type { CreateProductUseCase } from '@application/products/usecases/create-product.usecase'
+import type { DeleteProductUseCase } from '@application/products/usecases/delete-product.usecase'
+import type { GetAllProductsUseCase } from '@application/products/usecases/get-all-products.usecase'
+import type { GetProductUseCase } from '@application/products/usecases/get-product.usecase'
+import type { UpdateProductUseCase } from '@application/products/usecases/update-product.usecase'
 import { Product } from '@domain/products/entities/product.entity'
+import { Test, type TestingModule } from '@nestjs/testing'
+import { ProductsController } from './products.controller'
 
 describe('ProductsController', () => {
   let controller: ProductsController
@@ -52,39 +52,42 @@ describe('ProductsController', () => {
       controllers: [ProductsController],
       providers: [
         {
-          provide: CreateProductUseCase,
+          provide: 'CREATE_PRODUCT_USE_CASE',
           useValue: mockCreateProductUseCase,
         },
         {
-          provide: GetProductUseCase,
+          provide: 'GET_PRODUCT_USE_CASE',
           useValue: mockGetProductUseCase,
         },
         {
-          provide: GetAllProductsUseCase,
+          provide: 'GET_ALL_PRODUCTS_USE_CASE',
           useValue: mockGetAllProductsUseCase,
         },
         {
-          provide: UpdateProductUseCase,
+          provide: 'UPDATE_PRODUCT_USE_CASE',
           useValue: mockUpdateProductUseCase,
         },
         {
-          provide: DeleteProductUseCase,
+          provide: 'DELETE_PRODUCT_USE_CASE',
           useValue: mockDeleteProductUseCase,
         },
       ],
     }).compile()
 
     controller = module.get<ProductsController>(ProductsController)
-    createProductUseCase =
-      module.get<CreateProductUseCase>(CreateProductUseCase)
-    getProductUseCase = module.get<GetProductUseCase>(GetProductUseCase)
-    getAllProductsUseCase = module.get<GetAllProductsUseCase>(
-      GetAllProductsUseCase,
+    createProductUseCase = module.get<CreateProductUseCase>(
+      'CREATE_PRODUCT_USE_CASE',
     )
-    updateProductUseCase =
-      module.get<UpdateProductUseCase>(UpdateProductUseCase)
-    deleteProductUseCase =
-      module.get<DeleteProductUseCase>(DeleteProductUseCase)
+    getProductUseCase = module.get<GetProductUseCase>('GET_PRODUCT_USE_CASE')
+    getAllProductsUseCase = module.get<GetAllProductsUseCase>(
+      'GET_ALL_PRODUCTS_USE_CASE',
+    )
+    updateProductUseCase = module.get<UpdateProductUseCase>(
+      'UPDATE_PRODUCT_USE_CASE',
+    )
+    deleteProductUseCase = module.get<DeleteProductUseCase>(
+      'DELETE_PRODUCT_USE_CASE',
+    )
   })
 
   it('should be defined', () => {

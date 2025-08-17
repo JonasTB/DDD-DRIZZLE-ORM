@@ -1,32 +1,38 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Inject,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger'
-import { CreateProductDto } from '../../application/products/dto/create-product.dto'
-import { UpdateProductDto } from '../../application/products/dto/update-product.dto'
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
+import type { CreateProductDto } from '../../application/products/dto/create-product.dto'
 import { ProductResponseDto } from '../../application/products/dto/product-response.dto'
-import { CreateProductUseCase } from '../../application/products/usecases/create-product.usecase'
-import { GetProductUseCase } from '../../application/products/usecases/get-product.usecase'
-import { GetAllProductsUseCase } from '../../application/products/usecases/get-all-products.usecase'
-import { UpdateProductUseCase } from '../../application/products/usecases/update-product.usecase'
-import { DeleteProductUseCase } from '../../application/products/usecases/delete-product.usecase'
+import type { UpdateProductDto } from '../../application/products/dto/update-product.dto'
+import type { CreateProductUseCase } from '../../application/products/usecases/create-product.usecase'
+import type { DeleteProductUseCase } from '../../application/products/usecases/delete-product.usecase'
+import type { GetAllProductsUseCase } from '../../application/products/usecases/get-all-products.usecase'
+import type { GetProductUseCase } from '../../application/products/usecases/get-product.usecase'
+import type { UpdateProductUseCase } from '../../application/products/usecases/update-product.usecase'
 
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(
+    @Inject('CREATE_PRODUCT_USE_CASE')
     private readonly createProductUseCase: CreateProductUseCase,
+    @Inject('GET_PRODUCT_USE_CASE')
     private readonly getProductUseCase: GetProductUseCase,
+    @Inject('GET_ALL_PRODUCTS_USE_CASE')
     private readonly getAllProductsUseCase: GetAllProductsUseCase,
+    @Inject('UPDATE_PRODUCT_USE_CASE')
     private readonly updateProductUseCase: UpdateProductUseCase,
+    @Inject('DELETE_PRODUCT_USE_CASE')
     private readonly deleteProductUseCase: DeleteProductUseCase,
   ) {}
 

@@ -5,11 +5,9 @@ import { User } from '../../domain/users/entities/user.entity'
 import type { IUserRepository } from '../../domain/users/repositories/user.repository.interface'
 import { users } from '../database/schema/users.schema'
 
-const DATABASE = 'DATABASE'
-
 @Injectable()
 export class UserRepository implements IUserRepository {
-  constructor(@Inject(DATABASE) private readonly db: PostgresJsDatabase) {}
+  constructor(@Inject('DATABASE') private readonly db: PostgresJsDatabase) {}
 
   async create(user: {
     email: string

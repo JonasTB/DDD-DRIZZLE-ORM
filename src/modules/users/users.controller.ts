@@ -1,32 +1,38 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Inject,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common'
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger'
-import { CreateUserDto } from '../../application/users/dto/create-user.dto'
-import { UpdateUserDto } from '../../application/users/dto/update-user.dto'
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
+import type { CreateUserDto } from '../../application/users/dto/create-user.dto'
+import type { UpdateUserDto } from '../../application/users/dto/update-user.dto'
 import { UserResponseDto } from '../../application/users/dto/user-response.dto'
-import { CreateUserUseCase } from '../../application/users/usecases/create-user.usecase'
-import { GetUserUseCase } from '../../application/users/usecases/get-user.usecase'
-import { GetAllUsersUseCase } from '../../application/users/usecases/get-all-users.usecase'
-import { UpdateUserUseCase } from '../../application/users/usecases/update-user.usecase'
-import { DeleteUserUseCase } from '../../application/users/usecases/delete-user.usecase'
+import type { CreateUserUseCase } from '../../application/users/usecases/create-user.usecase'
+import type { DeleteUserUseCase } from '../../application/users/usecases/delete-user.usecase'
+import type { GetAllUsersUseCase } from '../../application/users/usecases/get-all-users.usecase'
+import type { GetUserUseCase } from '../../application/users/usecases/get-user.usecase'
+import type { UpdateUserUseCase } from '../../application/users/usecases/update-user.usecase'
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(
+    @Inject('CREATE_USER_USE_CASE')
     private readonly createUserUseCase: CreateUserUseCase,
+    @Inject('GET_USER_USE_CASE')
     private readonly getUserUseCase: GetUserUseCase,
+    @Inject('GET_ALL_USERS_USE_CASE')
     private readonly getAllUsersUseCase: GetAllUsersUseCase,
+    @Inject('UPDATE_USER_USE_CASE')
     private readonly updateUserUseCase: UpdateUserUseCase,
+    @Inject('DELETE_USER_USE_CASE')
     private readonly deleteUserUseCase: DeleteUserUseCase,
   ) {}
 

@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { Product } from '../../../domain/products/entities/product.entity'
-import type { ProductRepository } from '../../../infrastructure/repositories/product.repository'
+import type { IProductRepository } from '../../../domain/products/repositories/product.repository.interface'
 import type { CreateProductDto } from '../dto/create-product.dto'
 
 @Injectable()
 export class CreateProductUseCase {
-  constructor(private readonly productRepository: ProductRepository) {}
+  constructor(
+    @Inject('PRODUCT_REPOSITORY')
+    private readonly productRepository: IProductRepository,
+  ) {}
 
   async execute(createProductDto: CreateProductDto): Promise<Product> {
     const productData = Product.create(

@@ -1,11 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Inject, Injectable, NotFoundException } from '@nestjs/common'
 import type { User } from '../../../domain/users/entities/user.entity'
-import type { UserRepository } from '../../../infrastructure/repositories/user.repository'
+import type { IUserRepository } from '../../../domain/users/repositories/user.repository.interface'
 import type { UpdateUserDto } from '../dto/update-user.dto'
 
 @Injectable()
 export class UpdateUserUseCase {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    @Inject('USER_REPOSITORY') private readonly userRepository: IUserRepository,
+  ) {}
 
   async execute(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const existingUser = await this.userRepository.findById(id)

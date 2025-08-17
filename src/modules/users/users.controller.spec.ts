@@ -1,13 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing'
-import { UsersController } from './users.controller'
-import { CreateUserUseCase } from '@application/users/usecases/create-user.usecase'
-import { GetUserUseCase } from '@application/users/usecases/get-user.usecase'
-import { GetAllUsersUseCase } from '@application/users/usecases/get-all-users.usecase'
-import { UpdateUserUseCase } from '@application/users/usecases/update-user.usecase'
-import { DeleteUserUseCase } from '@application/users/usecases/delete-user.usecase'
-import { CreateUserDto } from '@application/users/dto/create-user.dto'
-import { UpdateUserDto } from '@application/users/dto/update-user.dto'
+import type { CreateUserDto } from '@application/users/dto/create-user.dto'
+import type { UpdateUserDto } from '@application/users/dto/update-user.dto'
+import type { CreateUserUseCase } from '@application/users/usecases/create-user.usecase'
+import type { DeleteUserUseCase } from '@application/users/usecases/delete-user.usecase'
+import type { GetAllUsersUseCase } from '@application/users/usecases/get-all-users.usecase'
+import type { GetUserUseCase } from '@application/users/usecases/get-user.usecase'
+import type { UpdateUserUseCase } from '@application/users/usecases/update-user.usecase'
 import { User } from '@domain/users/entities/user.entity'
+import { Test, type TestingModule } from '@nestjs/testing'
+import { UsersController } from './users.controller'
 
 describe('UsersController', () => {
   let controller: UsersController
@@ -51,34 +51,36 @@ describe('UsersController', () => {
       controllers: [UsersController],
       providers: [
         {
-          provide: CreateUserUseCase,
+          provide: 'CREATE_USER_USE_CASE',
           useValue: mockCreateUserUseCase,
         },
         {
-          provide: GetUserUseCase,
+          provide: 'GET_USER_USE_CASE',
           useValue: mockGetUserUseCase,
         },
         {
-          provide: GetAllUsersUseCase,
+          provide: 'GET_ALL_USERS_USE_CASE',
           useValue: mockGetAllUsersUseCase,
         },
         {
-          provide: UpdateUserUseCase,
+          provide: 'UPDATE_USER_USE_CASE',
           useValue: mockUpdateUserUseCase,
         },
         {
-          provide: DeleteUserUseCase,
+          provide: 'DELETE_USER_USE_CASE',
           useValue: mockDeleteUserUseCase,
         },
       ],
     }).compile()
 
     controller = module.get<UsersController>(UsersController)
-    createUserUseCase = module.get<CreateUserUseCase>(CreateUserUseCase)
-    getUserUseCase = module.get<GetUserUseCase>(GetUserUseCase)
-    getAllUsersUseCase = module.get<GetAllUsersUseCase>(GetAllUsersUseCase)
-    updateUserUseCase = module.get<UpdateUserUseCase>(UpdateUserUseCase)
-    deleteUserUseCase = module.get<DeleteUserUseCase>(DeleteUserUseCase)
+    createUserUseCase = module.get<CreateUserUseCase>('CREATE_USER_USE_CASE')
+    getUserUseCase = module.get<GetUserUseCase>('GET_USER_USE_CASE')
+    getAllUsersUseCase = module.get<GetAllUsersUseCase>(
+      'GET_ALL_USERS_USE_CASE',
+    )
+    updateUserUseCase = module.get<UpdateUserUseCase>('UPDATE_USER_USE_CASE')
+    deleteUserUseCase = module.get<DeleteUserUseCase>('DELETE_USER_USE_CASE')
   })
 
   it('should be defined', () => {

@@ -5,11 +5,9 @@ import { Product } from '../../domain/products/entities/product.entity'
 import type { IProductRepository } from '../../domain/products/repositories/product.repository.interface'
 import { products } from '../database/schema/products.schema'
 
-const DATABASE = 'DATABASE'
-
 @Injectable()
 export class ProductRepository implements IProductRepository {
-  constructor(@Inject(DATABASE) private readonly db: PostgresJsDatabase) {}
+  constructor(@Inject('DATABASE') private readonly db: PostgresJsDatabase) {}
 
   async create(product: {
     name: string
