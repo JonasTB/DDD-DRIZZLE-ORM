@@ -1,15 +1,13 @@
 {
   "recommendations": [
+    "biomejs.biome",
     "ms-vscode.vscode-typescript-next",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
     "bradlc.vscode-tailwindcss",
     "ms-vscode.vscode-json",
     "redhat.vscode-yaml",
     "ms-azuretools.vscode-docker",
     "ms-vscode.vscode-node-azure-pack",
     "formulahendry.auto-rename-tag",
-    "christian-kohler.path-intellisense",
-    "ms-vscode.vscode-typescript-next"
+    "christian-kohler.path-intellisense"
   ]
 }

@@ -19,6 +19,7 @@ Esta aplicação segue os princípios do DDD com as seguintes camadas:
 - **Docker**: Containerização da aplicação
 - **Jest**: Framework de testes
 - **Swagger**: Documentação da API
+- **Biome**: Formatador de código rápido e moderno
 
 ## ✅ Status Atual
 

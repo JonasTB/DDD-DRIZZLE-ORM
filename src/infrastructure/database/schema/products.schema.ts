@@ -1,4 +1,12 @@
-import { pgTable, uuid, varchar, timestamp, text, decimal, integer } from 'drizzle-orm/pg-core';
+import {
+  decimal,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar,
+} from 'drizzle-orm/pg-core'
 
 export const products = pgTable('products', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -8,16 +16,16 @@ export const products = pgTable('products', {
   stock: integer('stock').notNull().default(0),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
+})
 
 export type Product = {
-  id: string;
-  name: string;
-  description: string | null;
-  price: number;
-  stock: number;
-  createdAt: Date;
-  updatedAt: Date;
-};
+  id: string
+  name: string
+  description: string | null
+  price: number
+  stock: number
+  createdAt: Date
+  updatedAt: Date
+}
 
-export type NewProduct = Omit<Product, 'id' | 'createdAt' | 'updatedAt'>;
+export type NewProduct = Omit<Product, 'id' | 'createdAt' | 'updatedAt'>

@@ -8,21 +8,16 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
-import { CreateUserDto } from '../../application/users/dto/create-user.dto';
-import { UpdateUserDto } from '../../application/users/dto/update-user.dto';
-import { UserResponseDto } from '../../application/users/dto/user-response.dto';
-import { CreateUserUseCase } from '../../application/users/usecases/create-user.usecase';
-import { GetUserUseCase } from '../../application/users/usecases/get-user.usecase';
-import { GetAllUsersUseCase } from '../../application/users/usecases/get-all-users.usecase';
-import { UpdateUserUseCase } from '../../application/users/usecases/update-user.usecase';
-import { DeleteUserUseCase } from '../../application/users/usecases/delete-user.usecase';
+} from '@nestjs/common'
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger'
+import { CreateUserDto } from '../../application/users/dto/create-user.dto'
+import { UpdateUserDto } from '../../application/users/dto/update-user.dto'
+import { UserResponseDto } from '../../application/users/dto/user-response.dto'
+import { CreateUserUseCase } from '../../application/users/usecases/create-user.usecase'
+import { GetUserUseCase } from '../../application/users/usecases/get-user.usecase'
+import { GetAllUsersUseCase } from '../../application/users/usecases/get-all-users.usecase'
+import { UpdateUserUseCase } from '../../application/users/usecases/update-user.usecase'
+import { DeleteUserUseCase } from '../../application/users/usecases/delete-user.usecase'
 
 @ApiTags('users')
 @Controller('users')
@@ -45,14 +40,14 @@ export class UsersController {
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 409, description: 'User already exists' })
   async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
-    const user = await this.createUserUseCase.execute(createUserDto);
+    const user = await this.createUserUseCase.execute(createUserDto)
     return {
       id: user.id,
       email: user.email,
       name: user.name,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-    };
+    }
   }
 
   @Get()
@@ -63,14 +58,14 @@ export class UsersController {
     type: [UserResponseDto],
   })
   async findAll(): Promise<UserResponseDto[]> {
-    const users = await this.getAllUsersUseCase.execute();
-    return users.map(user => ({
+    const users = await this.getAllUsersUseCase.execute()
+    return users.map((user) => ({
       id: user.id,
       email: user.email,
       name: user.name,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-    }));
+    }))
   }
 
   @Get(':id')
@@ -83,14 +78,14 @@ export class UsersController {
   })
   @ApiResponse({ status: 404, description: 'User not found' })
   async findOne(@Param('id') id: string): Promise<UserResponseDto> {
-    const user = await this.getUserUseCase.execute(id);
+    const user = await this.getUserUseCase.execute(id)
     return {
       id: user.id,
       email: user.email,
       name: user.name,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-    };
+    }
   }
 
   @Patch(':id')
@@ -107,14 +102,14 @@ export class UsersController {
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserResponseDto> {
-    const user = await this.updateUserUseCase.execute(id, updateUserDto);
+    const user = await this.updateUserUseCase.execute(id, updateUserDto)
     return {
       id: user.id,
       email: user.email,
       name: user.name,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-    };
+    }
   }
 
   @Delete(':id')
@@ -124,6 +119,6 @@ export class UsersController {
   @ApiResponse({ status: 204, description: 'User deleted successfully' })
   @ApiResponse({ status: 404, description: 'User not found' })
   async remove(@Param('id') id: string): Promise<void> {
-    await this.deleteUserUseCase.execute(id);
+    await this.deleteUserUseCase.execute(id)
   }
 }

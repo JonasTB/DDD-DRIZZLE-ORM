@@ -1,13 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { ProductRepository } from '../../../infrastructure/repositories/product.repository';
-import { Product } from '../../../domain/products/entities/product.entity';
-import { CreateProductDto } from '../dto/create-product.dto';
+import { Injectable } from '@nestjs/common'
+import { Product } from '../../../domain/products/entities/product.entity'
+import type { ProductRepository } from '../../../infrastructure/repositories/product.repository'
+import type { CreateProductDto } from '../dto/create-product.dto'
 
 @Injectable()
 export class CreateProductUseCase {
-  constructor(
-    private readonly productRepository: ProductRepository
-  ) {}
+  constructor(private readonly productRepository: ProductRepository) {}
 
   async execute(createProductDto: CreateProductDto): Promise<Product> {
     const productData = Product.create(
@@ -15,8 +13,8 @@ export class CreateProductUseCase {
       createProductDto.description || null,
       createProductDto.price,
       createProductDto.stock,
-    );
+    )
 
-    return this.productRepository.create(productData);
+    return this.productRepository.create(productData)
   }
 }

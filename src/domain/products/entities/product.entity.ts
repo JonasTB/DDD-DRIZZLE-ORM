@@ -14,13 +14,18 @@ export class Product {
     description: string | null,
     price: number,
     stock: number,
-  ): { name: string; description: string | null; price: number; stock: number } {
+  ): {
+    name: string
+    description: string | null
+    price: number
+    stock: number
+  } {
     return {
       name,
       description,
       price,
       stock,
-    };
+    }
   }
 
   updateStock(newStock: number): Product {
@@ -32,7 +37,7 @@ export class Product {
       newStock,
       this.createdAt,
       new Date(),
-    );
+    )
   }
 
   updatePrice(newPrice: number): Product {
@@ -44,7 +49,7 @@ export class Product {
       this.stock,
       this.createdAt,
       new Date(),
-    );
+    )
   }
 
   updateName(name: string): Product {
@@ -56,6 +61,6 @@ export class Product {
       this.stock,
       this.createdAt,
       new Date(),
-    );
+    )
   }
 }

@@ -15,4 +15,4 @@ module.exports = {
     '^@infrastructure/(.*)$': '<rootDir>/infrastructure/$1',
     '^@interfaces/(.*)$': '<rootDir>/interfaces/$1',
   },
-};
+}

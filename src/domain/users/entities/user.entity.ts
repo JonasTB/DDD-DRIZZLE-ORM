@@ -17,7 +17,7 @@ export class User {
       email,
       name,
       password,
-    };
+    }
   }
 
   updateName(name: string): User {
@@ -28,7 +28,7 @@ export class User {
       this.password,
       this.createdAt,
       new Date(),
-    );
+    )
   }
 
   updateEmail(email: string): User {
@@ -39,6 +39,6 @@ export class User {
       this.password,
       this.createdAt,
       new Date(),
-    );
+    )
   }
 }

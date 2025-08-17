@@ -1,5 +1,5 @@
-const { defineConfig } = require('drizzle-kit');
-require('dotenv').config();
+const { defineConfig } = require('drizzle-kit')
+require('dotenv').config()
 
 module.exports = defineConfig({
   schema: './src/infrastructure/database/schema/*',
@@ -14,4 +14,4 @@ module.exports = defineConfig({
   },
   verbose: true,
   strict: true,
-});
+})

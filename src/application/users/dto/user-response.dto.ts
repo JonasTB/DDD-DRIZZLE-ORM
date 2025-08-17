@@ -1,18 +1,24 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger'
 
 export class UserResponseDto {
   @ApiProperty({ example: 'uuid', description: 'User ID' })
-  id: string;
+  id: string
 
   @ApiProperty({ example: 'john@example.com', description: 'User email' })
-  email: string;
+  email: string
 
   @ApiProperty({ example: 'John Doe', description: 'User name' })
-  name: string;
+  name: string
 
-  @ApiProperty({ example: '2024-01-01T00:00:00.000Z', description: 'Creation date' })
-  createdAt: Date;
+  @ApiProperty({
+    example: '2024-01-01T00:00:00.000Z',
+    description: 'Creation date',
+  })
+  createdAt: Date
 
-  @ApiProperty({ example: '2024-01-01T00:00:00.000Z', description: 'Last update date' })
-  updatedAt: Date;
+  @ApiProperty({
+    example: '2024-01-01T00:00:00.000Z',
+    description: 'Last update date',
+  })
+  updatedAt: Date
 }

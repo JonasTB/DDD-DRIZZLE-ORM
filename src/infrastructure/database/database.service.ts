@@ -1,15 +1,13 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+import { Inject, Injectable } from '@nestjs/common'
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js'
 
-const DATABASE = 'DATABASE';
+const DATABASE = 'DATABASE'
 
 @Injectable()
 export class DatabaseService {
-  constructor(
-    @Inject(DATABASE) private readonly db: PostgresJsDatabase,
-  ) {}
+  constructor(@Inject(DATABASE) private readonly db: PostgresJsDatabase) {}
 
   getDatabase(): PostgresJsDatabase {
-    return this.db;
+    return this.db
   }
 }

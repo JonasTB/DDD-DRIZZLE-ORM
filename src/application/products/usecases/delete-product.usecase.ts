@@ -1,25 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ProductRepository } from '../../../infrastructure/repositories/product.repository';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import type { ProductRepository } from '../../../infrastructure/repositories/product.repository'
 
 @Injectable()
 export class DeleteProductUseCase {
-  constructor(
-    private readonly productRepository: ProductRepository
-  ) {}
+  constructor(private readonly productRepository: ProductRepository) {}
 
   async execute(id: string): Promise<boolean> {
-    const existingProduct = await this.productRepository.findById(id);
-    
+    const existingProduct = await this.productRepository.findById(id)
+
     if (!existingProduct) {
-      throw new NotFoundException('Product not found');
+      throw new NotFoundException('Product not found')
     }
 
-    const deleted = await this.productRepository.delete(id);
-    
+    const deleted = await this.productRepository.delete(id)
+
     if (!deleted) {
-      throw new NotFoundException('Failed to delete product');
+      throw new NotFoundException('Failed to delete product')
     }
 
-    return deleted;
+    return deleted
   }
 }
