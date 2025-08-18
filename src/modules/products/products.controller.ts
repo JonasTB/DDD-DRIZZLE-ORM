@@ -11,9 +11,9 @@ import {
   Post,
 } from '@nestjs/common'
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
-import type { CreateProductDto } from '../../application/products/dto/create-product.dto'
+import { CreateProductDto } from '../../application/products/dto/create-product.dto'
 import { ProductResponseDto } from '../../application/products/dto/product-response.dto'
-import type { UpdateProductDto } from '../../application/products/dto/update-product.dto'
+import { UpdateProductDto } from '../../application/products/dto/update-product.dto'
 import type { CreateProductUseCase } from '../../application/products/usecases/create-product.usecase'
 import type { DeleteProductUseCase } from '../../application/products/usecases/delete-product.usecase'
 import type { GetAllProductsUseCase } from '../../application/products/usecases/get-all-products.usecase'

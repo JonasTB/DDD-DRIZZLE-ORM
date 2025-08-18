@@ -11,8 +11,8 @@ import {
   Post,
 } from '@nestjs/common'
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger'
-import type { CreateUserDto } from '../../application/users/dto/create-user.dto'
-import type { UpdateUserDto } from '../../application/users/dto/update-user.dto'
+import { CreateUserDto } from '../../application/users/dto/create-user.dto'
+import { UpdateUserDto } from '../../application/users/dto/update-user.dto'
 import { UserResponseDto } from '../../application/users/dto/user-response.dto'
 import type { CreateUserUseCase } from '../../application/users/usecases/create-user.usecase'
 import type { DeleteUserUseCase } from '../../application/users/usecases/delete-user.usecase'

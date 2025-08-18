@@ -18,5 +18,13 @@
       "trailingCommas": "all",
       "semicolons": "asNeeded"
     }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "style": {
+        "useImportType": "off"
+      }
+    }
   }
 }

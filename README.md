@@ -19,7 +19,7 @@ Esta aplicação segue os princípios do DDD com as seguintes camadas:
 - **Docker**: Containerização da aplicação
 - **Jest**: Framework de testes
 - **Swagger**: Documentação da API
-- **Biome**: Formatador de código rápido e moderno
+- **Biome**: Formatador e linter de código rápido e moderno
 
 ## ✅ Status Atual
 
@@ -37,18 +37,34 @@ Esta aplicação segue os princípios do DDD com as seguintes camadas:
 
 ```
 src/
-├── domain/                 # Camada de domínio
-│   ├── users/             # Entidades e interfaces de usuário
-│   └── products/          # Entidades e interfaces de produto
-├── application/           # Camada de aplicação
-│   ├── users/            # Casos de uso e DTOs de usuário
-│   └── products/         # Casos de uso e DTOs de produto
-├── infrastructure/        # Camada de infraestrutura
-│   ├── database/         # Configuração e schemas do banco
-│   └── repositories/     # Implementações dos repositórios
-└── modules/              # Módulos NestJS
-    ├── users/            # Módulo de usuários
-    └── products/         # Módulo de produtos
+├── main.ts                    # Ponto de entrada da aplicação
+├── app.module.ts              # Módulo principal da aplicação
+├── domain/                    # Camada de domínio
+│   ├── users/                # Entidades e interfaces de usuário
+│   │   ├── entities/         # Entidades de domínio
+│   │   └── repositories/     # Interfaces de repositório
+│   └── products/             # Entidades e interfaces de produto
+│       ├── entities/         # Entidades de domínio
+│       └── repositories/     # Interfaces de repositório
+├── application/              # Camada de aplicação
+│   ├── users/               # Casos de uso e DTOs de usuário
+│   │   ├── dto/             # Data Transfer Objects
+│   │   └── usecases/        # Casos de uso da aplicação
+│   └── products/            # Casos de uso e DTOs de produto
+│       ├── dto/             # Data Transfer Objects
+│       └── usecases/        # Casos de uso da aplicação
+├── infrastructure/           # Camada de infraestrutura
+│   ├── database/            # Configuração e schemas do banco
+│   │   ├── schema/          # Schemas do Drizzle
+│   │   ├── database.module.ts
+│   │   └── database.service.ts
+│   └── repositories/        # Implementações dos repositórios
+├── modules/                 # Módulos NestJS
+│   ├── users/              # Módulo de usuários
+│   └── products/           # Módulo de produtos
+└── common/                  # Utilitários e código compartilhado
+    └── utils/               # Utilitários comuns
+        └── logger.utils.ts  # Utilitário de logging
 ```
 
 ## 🛠️ Instalação
@@ -229,8 +245,8 @@ npm run test:cov       # Testes com coverage
 npm run test:e2e       # Testes end-to-end
 
 # Qualidade de código
-npm run lint           # Executar ESLint
-npm run format         # Formatar código com Prettier
+npm run format         # Formatar código com Biome
+npm run lint           # Executar linting com Biome
 ```
 
 ## 🌍 Variáveis de Ambiente
@@ -267,6 +283,9 @@ npm run format         # Formatar código com Prettier
 - **GetAllProductsUseCase**: Listagem de todos os produtos
 - **UpdateProductUseCase**: Atualização de produtos
 - **DeleteProductUseCase**: Remoção de produtos
+
+### Utilitários Comuns
+- **Logger Utils**: Utilitário de logging centralizado na pasta `common/utils/`
 
 ## 🚀 Deploy
 
